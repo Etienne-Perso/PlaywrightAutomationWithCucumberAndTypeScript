@@ -145,8 +145,19 @@ do this config:
   		 },
 
 
+Reorganize the project structure:
+---------------------------------
 
+Put basepage.spec.ts under hooks folder.
 
+Do the following configuration in the homepagelogout.spec.ts and loginpage.spec.ts files:
+
+	import {page} from "../../hooks/basepage.spec"
+
+Do the Following configuration in the cucumber.json file:
+	"require": [
+        	    "e2etests/tests/steps/**/*.ts", "e2etests/hooks/basepage.spec.ts"
+        	   ],
 
 
 
