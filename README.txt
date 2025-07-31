@@ -161,6 +161,62 @@ Do the Following configuration in the cucumber.json file:
 
 
 
+Locators: there is two approches:
+Approch 1: put the locators in the contructor as below
+
+    private emailField: Locator
+    private passwordField: Locator
+    private loginButton: Locator
+    etc...
+
+ constructor(page:Page){
+        this.page=page
+	this.emailField = page.locator("input[name='email']")
+        this.passwordField = page.locator("input[name='password']")
+        this.loginButton = page.locator("input[value='Login']")
+	
+    }
+
+async enterUsername(username: string) {
+        await this.emailField.fill(username)
+    }
+
+Approch 2: create json files under locators folder as below
+{
+    "emailField":{
+        "locator":"input[name='email']",
+        "locatorOptions":{},
+        "description":"email filed",
+        "actionOptions":{}
+    },
+    "pwdField":{
+        "locator": "input[name='password']",
+        "description": "password field"
+    },
+
+    "loginBtn":{
+        "locator":"input[value='Login']",
+        "description":"login button"
+    },
+    
+    "accInfo":{
+        "locator":"//a[normalize-space()='Edit your account information']",
+        "description":"account information"
+    },
+    "dismissibleAlert":{
+        "locator":"//div[@class='alert alert-danger alert-dismissible']",
+        "description":"dismissible alert for bad credentials"
+    }
+}
+
+Then we can refer to them like so with the proper import:
+
+import * as LoginPageLoc from "../locators/loginpageloc.json"
+
+
+ async enterUsername(username:string){
+        await this.page.locator(LoginPageLoc.emailField.locator).fill(username)
+    }
 
 
 

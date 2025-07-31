@@ -2,8 +2,7 @@ Feature: Hompe page functionnality
 
   Scenario: to test home page logout
     Given user is on the home page
-    When user enter login username as "<username>"
-    When user enter login password as "<password>"
+    Given user is connected as "<username>" and "<password>"
     Given user upon logout
     Then logout should be succesfful
 

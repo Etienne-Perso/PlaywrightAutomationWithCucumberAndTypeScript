@@ -1,35 +1,25 @@
 import { Given, When, Then, setDefaultTimeout, Before, After } from "@cucumber/cucumber"
-import { expect } from "@playwright/test"
 import {page} from "../../hooks/basepage.spec"
+import LoginPage from "../pages/loginpage";
+import HomePage from "../pages/homepage";
 
-
+let homePage:HomePage
+let loginPage:LoginPage
 
 Given('user is on the home page', async function () {
-    await page.goto("https://ecommerce-playground.lambdatest.io/")
-    await page.locator("//a[@role='button']//span[@class='title'][normalize-space()='My account']").hover()
-    await page.locator("//span[normalize-space()='Login']").click()
+    homePage=new HomePage(page)
+    loginPage=new LoginPage(page)
+    await homePage.goToLoginPage()
 });
 
+Given ("user is connected as {string} and {string}", async function (username, password){
+    await homePage.isConnected(username, password)
+})
+
 Given('user upon logout', async function () {
-    const badcredentials = await page.locator("//div[@class='alert alert-danger alert-dismissible']").isVisible()
-    if (!badcredentials) {
-        await page.waitForSelector("//a[@role='button']//span[@class='title'][normalize-space()='My account']")
-        await page.locator("//a[@role='button']//span[@class='title'][normalize-space()='My account']").hover();
-        await page.locator("//span[normalize-space()='Logout']").click();
-        await page.locator("//a[@class='btn btn-primary']").click();
-    }
+   await homePage.logout()
 });
 
 Then('logout should be succesfful', async function () {
-    const badcredentials = await page.locator("//div[@class='alert alert-danger alert-dismissible']").isVisible()
-    if (!badcredentials) {
-        let AccountLogout = await page.locator("//h1[@class='page-title my-3']").isVisible()
-        if (!AccountLogout) {
-            expect(!AccountLogout).toBe(true)
-            console.log("logout is successfull")
-        }
-    }else{
-            console.log("logout is failed, login first...!")
-        }
+    await homePage.waitForLogoutConfirmation()
 });
-

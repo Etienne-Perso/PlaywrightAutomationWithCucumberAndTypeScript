@@ -2,8 +2,7 @@ Feature: Hompe page login functionnality
 
   Scenario: to test login page
     Given user is on the home page
-    When user enter login username as "<username>"
-    When user enter login password as "<password>"
+    When user enter login details as "<username>" and "<password>"
     Then user acount should be displayed
 
     Examples:

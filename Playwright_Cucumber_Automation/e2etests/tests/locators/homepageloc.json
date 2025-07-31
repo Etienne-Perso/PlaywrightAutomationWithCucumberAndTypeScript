@@ -1,0 +1,26 @@
+{
+    "accMenu":{
+        "locator":"//a[@role='button']//span[@class='title'][normalize-space()='My account']",
+        "description": "account menu"
+    },
+
+    "loginLink":{
+        "locator":"//span[normalize-space()='Login']",
+        "description": "login link"
+    },
+
+    "logoutLink":{
+        "locator":"//span[normalize-space()='Logout']",
+        "description":"logout link"
+    },
+
+    "continueBtn":{
+        "locator":"//a[@class='btn btn-primary']",
+        "description":"continue button"
+    },
+
+    "accLogoutText":{
+        "locator":"//h1[@class='page-title my-3']",
+        "description":"Account Logout text"
+    }
+}

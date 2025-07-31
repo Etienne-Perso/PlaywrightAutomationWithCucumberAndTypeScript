@@ -1,0 +1,26 @@
+{
+    "emailField":{
+        "locator":"input[name='email']",
+        "locatorOptions":{},
+        "description":"email filed",
+        "actionOptions":{}
+    },
+    "pwdField":{
+        "locator": "input[name='password']",
+        "description": "password field"
+    },
+
+    "loginBtn":{
+        "locator":"input[value='Login']",
+        "description":"login button"
+    },
+    
+    "accInfo":{
+        "locator":"//a[normalize-space()='Edit your account information']",
+        "description":"account information"
+    },
+    "dismissibleAlert":{
+        "locator":"//div[@class='alert alert-danger alert-dismissible']",
+        "description":"dismissible alert for bad credentials"
+    }
+}
