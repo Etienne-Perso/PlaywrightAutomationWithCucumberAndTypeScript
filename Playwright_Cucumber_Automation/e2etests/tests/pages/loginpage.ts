@@ -1,30 +1,32 @@
 import {Page} from "@playwright/test"
 import * as LoginPageLoc from "../locators/loginpageloc.json"
+import BasePage from "./basepage"
 
-export default class LoginPage{
+export default class LoginPage extends BasePage{
 
-    private page: Page    
-
+      
     constructor(page:Page){
-        this.page=page
+        super(page)
     }
 
     async enterUsername(username:string){
-        await this.page.locator(LoginPageLoc.emailField.locator).fill(username)
+        await this.enter(LoginPageLoc.emailField, username)
     }
 
      async enterPassword(password:string){
-        await this.page.locator(LoginPageLoc.pwdField.locator).fill(password)
-        await this.page.locator(LoginPageLoc.loginBtn.locator).click()
+        await this.enter(LoginPageLoc.pwdField, password)
+        await this.click(LoginPageLoc.loginBtn)
         await this.page.waitForTimeout(1000)
     }
 
     async waitForEditAccInfo(){
-        const accountInfo = await this.page.locator(LoginPageLoc.accInfo.locator).isVisible()
-        const badcredentials = await this.page.locator(LoginPageLoc.dismissibleAlert.locator).isVisible()
+        const accountInfoLoc = await this.getLocator(LoginPageLoc.accInfo)
+        let accountInfo = await accountInfoLoc.isVisible()
+        const badcredentialsLoc = await this.getLocator(LoginPageLoc.dismissibleAlert)
+        let badcredentials = await badcredentialsLoc.isVisible()
 
         if (accountInfo) {
-            await this.page.locator(LoginPageLoc.accInfo.locator).isVisible()
+            accountInfo
             //(accountInfo).toBe(true)
             console.log("login is successfull")
             return true

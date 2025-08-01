@@ -1,47 +1,55 @@
 import {Page} from "@playwright/test"
 import * as HomePageLoc from "../locators/homepageloc.json"
 import * as LoginPageLoc from "../locators/loginpageloc.json"
+import BasePage from "./basepage"
 
-export default class HomePage{
-
-    private page:Page
+export default class HomePage extends BasePage{
 
     constructor(page:Page){
-        this.page=page
+        super(page)
     }
 
       async goToLoginPage(){
         await this.page.goto("https://ecommerce-playground.lambdatest.io/")
-        await this.page.locator(HomePageLoc.accMenu.locator).hover()
-        await this.page.locator(HomePageLoc.loginLink.locator).click()
+        const accMenuLoc = await this.getLocator(HomePageLoc.accMenu)
+        await accMenuLoc.hover()
+        const loginLink = await this.getLocator(HomePageLoc.loginLink)
+        await loginLink.click()
     }
 
     async isConnected(username:string, password:string){
-        await this.page.locator(LoginPageLoc.emailField.locator).fill(username)
-        await this.page.locator(LoginPageLoc.pwdField.locator).fill(password)
-        await this.page.locator(LoginPageLoc.loginBtn.locator).click()
+        await this.enter(LoginPageLoc.emailField, username)
+        await this.enter(LoginPageLoc.pwdField, password)
+        await this.click(LoginPageLoc.loginBtn)
     }
 
     async logout(){
-         const badcredentials = await this.page.locator(LoginPageLoc.dismissibleAlert.locator).isVisible()
+        const badcredentialsLoc = await this.getLocator(LoginPageLoc.dismissibleAlert)
+        let badcredentials = await badcredentialsLoc.isVisible()
         if (!badcredentials) {
             await this.page.waitForSelector(HomePageLoc.accMenu.locator)
-            await this.page.locator(HomePageLoc.accMenu.locator).hover();
-            await this.page.locator(HomePageLoc.logoutLink.locator).click();
-            await this.page.locator(HomePageLoc.continueBtn.locator).click();
+            await this.page.locator(HomePageLoc.accMenu.locator).hover()
+            await this.click(HomePageLoc.logoutLink)
+            await this.click(HomePageLoc.continueBtn)
         }
     }
 
-     async waitForLogoutConfirmation(){
-         const badcredentials = await this.page.locator(LoginPageLoc.dismissibleAlert.locator).isVisible()
-    if (!badcredentials) {
-        let AccountLogout = await this.page.locator(HomePageLoc.accLogoutText.locator).isVisible()
-        if (!AccountLogout) {
-            //expect(!AccountLogout).toBe(true)
-            console.log("logout is successfull")
+    async waitForLogoutConfirmation(){
+        const badcredentialsLoc = await this.getLocator(LoginPageLoc.dismissibleAlert)
+        let badcredentials = await badcredentialsLoc.isVisible()
+        if (!badcredentials) {
+            const AccountLogoutLoc = await this.getLocator(HomePageLoc.accLogoutText)
+            let AccountLogout = await AccountLogoutLoc.isVisible()
+            if (!AccountLogout) {
+                //expect(!AccountLogout).toBe(true)
+                console.log("logout is successfull")
+                return true
+            }
+        }else{
+                console.log("login is failed...!")
+                console.log("You can't logout...! login first...!")
+                console.log("logout is failed")
+                return true
+            }    
         }
-    }else{
-            console.log("logout is failed, login first...!")
-        }    
-    }
 }

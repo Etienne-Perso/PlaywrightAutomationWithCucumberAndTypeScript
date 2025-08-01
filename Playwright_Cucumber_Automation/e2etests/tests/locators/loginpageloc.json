@@ -2,7 +2,7 @@
     "emailField":{
         "locator":"input[name='email']",
         "locatorOptions":{},
-        "description":"email filed",
+        "description":"email field",
         "actionOptions":{}
     },
     "pwdField":{

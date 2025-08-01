@@ -1,5 +1,5 @@
 import { Given, When, Then, setDefaultTimeout, Before, After } from "@cucumber/cucumber"
-import { page } from "../../hooks/basepage.spec";
+import { page } from "../../hooks/hooks.spec";
 import LoginPage from "../pages/loginpage";
 import { expect } from "@playwright/test";
 

@@ -1,7 +1,8 @@
 import { Given, When, Then, setDefaultTimeout, Before, After } from "@cucumber/cucumber"
-import {page} from "../../hooks/basepage.spec"
+import {page} from "../../hooks/hooks.spec"
 import LoginPage from "../pages/loginpage";
 import HomePage from "../pages/homepage";
+import { expect } from "@playwright/test";
 
 let homePage:HomePage
 let loginPage:LoginPage
@@ -21,5 +22,6 @@ Given('user upon logout', async function () {
 });
 
 Then('logout should be succesfful', async function () {
-    await homePage.waitForLogoutConfirmation()
+    const status=await homePage.waitForLogoutConfirmation()
+    expect(status).toEqual(true)
 });
