@@ -1,0 +1,169 @@
+[
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "hompe-page-login-functionnality;to-test-login-page",
+        "keyword": "Scenario",
+        "line": 3,
+        "name": "to test login page",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 2422752399
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "user is on the home page",
+            "match": {
+              "location": "e2etests\\tests\\steps\\homepagelogout.spec.ts:10"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 653966200
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "When ",
+            "line": 5,
+            "name": "user enter login details",
+            "match": {
+              "location": "e2etests\\tests\\steps\\loginpage.spec.ts:8"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 4678565599
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 6,
+            "name": "user acount should be displayed",
+            "match": {
+              "location": "e2etests\\tests\\steps\\loginpage.spec.ts:14"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 39365398
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 44913400
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "hompe-page-login-functionnality",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Hompe page login functionnality",
+    "tags": [],
+    "uri": "e2etests\\tests\\features\\01.loginpage.feature"
+  },
+  {
+    "description": "",
+    "elements": [
+      {
+        "description": "",
+        "id": "hompe-page-functionnality;to-test-home-page-logout",
+        "keyword": "Scenario",
+        "line": 3,
+        "name": "to test home page logout",
+        "steps": [
+          {
+            "keyword": "Before",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 1848629100
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 4,
+            "name": "user is on the home page",
+            "match": {
+              "location": "e2etests\\tests\\steps\\homepagelogout.spec.ts:10"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 1228064398
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 5,
+            "name": "user is connected",
+            "match": {
+              "location": "e2etests\\tests\\steps\\homepagelogout.spec.ts:16"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 3638762097
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Given ",
+            "line": 6,
+            "name": "user upon logout",
+            "match": {
+              "location": "e2etests\\tests\\steps\\homepagelogout.spec.ts:20"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 8672040699
+            }
+          },
+          {
+            "arguments": [],
+            "keyword": "Then ",
+            "line": 7,
+            "name": "logout should be succesfful",
+            "match": {
+              "location": "e2etests\\tests\\steps\\homepagelogout.spec.ts:24"
+            },
+            "result": {
+              "status": "passed",
+              "duration": 65105499
+            }
+          },
+          {
+            "keyword": "After",
+            "hidden": true,
+            "result": {
+              "status": "passed",
+              "duration": 43990300
+            }
+          }
+        ],
+        "tags": [],
+        "type": "scenario"
+      }
+    ],
+    "id": "hompe-page-functionnality",
+    "line": 1,
+    "keyword": "Feature",
+    "name": "Hompe page functionnality",
+    "tags": [],
+    "uri": "e2etests\\tests\\features\\02.homepagelogout.feature"
+  }
+]

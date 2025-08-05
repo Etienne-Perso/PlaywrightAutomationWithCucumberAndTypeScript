@@ -8,13 +8,26 @@
             "e2etests/tests/features/**/*.feature"
         ],
         "require": [
-            "e2etests/tests/steps/**/*.ts", "e2etests/hooks/basepage.spec.ts"
+            "e2etests/tests/steps/**/*.ts",
+            "e2etests/hooks/basepage.spec.ts"
         ],
         "requireModule": [
             "ts-node/register"
         ],
-        "format": [],
-        
+        "format": [
+            [
+                "json",
+                "reports/cucumber_report.json"
+            ],
+            [
+                "junit",
+                "reports/junit.xml"
+            ],
+            [
+                "html",
+                "reports/html_report.html"
+            ]
+        ],
         "publishQuiet": true
     }
 }

@@ -4,20 +4,20 @@
   "description": "This is automation of playwright with BDD",
   "main": "index.js",
   "scripts": {
-      "test":"cucumber-js test"
+    "test": "cucumber-js test"
   },
   "keywords": [
     "pw",
     "ts",
-    "js"    
+    "js"
   ],
-
   "author": "IMOU",
   "license": "ISC",
   "devDependencies": {
     "@cucumber/cucumber": "^12.1.0",
     "@playwright/test": "^1.54.1",
     "@types/node": "^24.1.0",
+    "dotenv": "^17.2.1",
     "ts-node": "^10.9.2",
     "typescript": "^5.8.3"
   }

@@ -5,10 +5,10 @@ import { expect } from "@playwright/test";
 
 let loginPage:LoginPage
 
-When ('user enter login details as {string} and {string}', async function (username, password) {
+When ('user enter login details', async function () {
     loginPage=new LoginPage(page)
-    await loginPage.enterUsername(username)
-    await loginPage.enterPassword(password)    
+    await loginPage.enterUsername()
+    await loginPage.enterPassword()    
 })
 
 Then('user acount should be displayed', async function () {

@@ -17,6 +17,7 @@ Cucumber:
 		npm i ts-node -D
 		npm i typescript -D
 		npm i @types/node -D
+		npm i dotenv -D
 		
 source:https://cucumber.io/docs/installation/javascript
 
@@ -219,13 +220,14 @@ import * as LoginPageLoc from "../locators/loginpageloc.json"
     }
 
 
-
-
-
-
-
-
-
-
-
-
+Generating reports:
+-------------------
+Under the reports folder created at the begining of the project, multiple reports format can be generated
+To generate those reports, go with this configuration:
+under the cucumber.json file then under format add the followings below:
+"format": [ 
+            ["json", "reports/cucumber_report.json"],
+            ["junit", "reports/junit.xml"],
+            ["html", "reports/html_report.html"]
+			
+],

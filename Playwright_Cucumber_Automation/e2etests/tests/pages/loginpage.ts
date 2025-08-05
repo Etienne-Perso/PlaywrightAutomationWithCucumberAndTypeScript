@@ -9,12 +9,12 @@ export default class LoginPage extends BasePage{
         super(page)
     }
 
-    async enterUsername(username:string){
-        await this.enter(LoginPageLoc.emailField, username)
+    async enterUsername(){
+        await this.enter(LoginPageLoc.emailField, process.env.user_name!)
     }
 
-     async enterPassword(password:string){
-        await this.enter(LoginPageLoc.pwdField, password)
+     async enterPassword(){
+        await this.enter(LoginPageLoc.pwdField, process.env.password!)
         await this.click(LoginPageLoc.loginBtn)
         await this.page.waitForTimeout(1000)
     }

@@ -10,16 +10,15 @@ export default class HomePage extends BasePage{
     }
 
       async goToLoginPage(){
-        await this.page.goto("https://ecommerce-playground.lambdatest.io/")
         const accMenuLoc = await this.getLocator(HomePageLoc.accMenu)
         await accMenuLoc.hover()
         const loginLink = await this.getLocator(HomePageLoc.loginLink)
         await loginLink.click()
     }
 
-    async isConnected(username:string, password:string){
-        await this.enter(LoginPageLoc.emailField, username)
-        await this.enter(LoginPageLoc.pwdField, password)
+    async isConnected(){
+        await this.enter(LoginPageLoc.emailField, process.env.user_name!)
+        await this.enter(LoginPageLoc.pwdField, process.env.password!)
         await this.click(LoginPageLoc.loginBtn)
     }
 

@@ -13,8 +13,8 @@ Given('user is on the home page', async function () {
     await homePage.goToLoginPage()
 });
 
-Given ("user is connected as {string} and {string}", async function (username, password){
-    await homePage.isConnected(username, password)
+Given ("user is connected", async function (){
+    await homePage.isConnected()
 })
 
 Given('user upon logout', async function () {
