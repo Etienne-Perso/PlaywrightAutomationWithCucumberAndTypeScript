@@ -5,6 +5,7 @@ Feature: Hompe page functionnality
     Given user is connected
     Given user upon logout
     Then logout should be succesfful
+    When this is a dammy step
 
     # Examples:
     #   | username             | password              |

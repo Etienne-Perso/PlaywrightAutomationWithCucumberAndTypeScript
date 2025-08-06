@@ -18,6 +18,9 @@ Cucumber:
 		npm i typescript -D
 		npm i @types/node -D
 		npm i dotenv -D
+		npm i cucumber-html-reporter -D
+		source: https://github.com/gkushang/cucumber-html-reporter
+		
 		
 source:https://cucumber.io/docs/installation/javascript
 
@@ -231,3 +234,88 @@ under the cucumber.json file then under format add the followings below:
             ["html", "reports/html_report.html"]
 			
 ],
+
+'scenario' and 'this' key words:
+--------------------------------
+We can use scenario only in the following hooks: Before, After, Beforestep, Afterstep
+
+console.log(message) will print the message in the console, whereas, 
+
+this.log(message) will print the message in the report.
+
+Contrary to the "scenario" key word, "this" key word is accessible throwght all the spec level. 
+
+"this" at the context level given by cucumber.
+	- this.log,
+	- this.attach,
+	- this.parameters.
+ 
+We can implement "this" key word in the POM as showned below: 
+
+1) this.log:
+
+Base page:
+
+import { ICreateLog } from "@cucumber/cucumber/lib/runtime/attachment_manager"
+
+protected page: Page
+   protected log: ICreateLog
+   
+    constructor(page:Page, log: ICreateLog ){
+        this.page=page
+        this.log=log
+    } 
+
+Home page:	
+constructor(page:Page, log: ICreateLog){
+        super(page, log)
+    }
+
+Login page: 
+constructor(page:Page, log: ICreateLog){
+        super(page, log)
+    }
+
+Nb: We add this.log when we instantiate the HomePage object or LoginPage as showned below at the steps level:
+
+Given('user is on the home page', async function () {
+    homePage=new HomePage(page, this.log)
+    loginPage=new LoginPage(page, this.log)
+    await homePage.goToLoginPage()
+});
+
+2) this.attach:
+It is used to attach many things to the report like images or objects and so on.
+
+example:
+ const obj={
+        fname:"John",
+        lname:"Kiny",
+        zip:30000      
+    }
+	
+    this.attach(JSON.stringify(obj), "application/json")
+
+    if (scenario.result?.status == Status.FAILED){
+        const img = await page.screenshot({
+            path:`./reports/${scenario.pickle.name}.png`
+        })
+		
+        this.attach(img, "image/png")
+    }
+	
+3) this.parameters : using variables accross different spec files or different steps. 
+No need for global variables or export/import things.
+
+this.parameters.a=10
+console.log(`login page: the value is ${this.parameters.a}`) -->.login page: the value is 10
+
+cucumber-html-reporter:
+-----------------------
+To generate the report --> npx ts-node .\index.ts
+
+To generate it automatically go with this config:
+
+"scripts": {
+    "test": "cucumber-js test & npx ts-node index.ts"
+  },

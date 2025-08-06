@@ -1,6 +1,7 @@
-import { Given, When, Then, setDefaultTimeout, Before, After, BeforeAll, AfterAll, AfterStep, BeforeStep } from "@cucumber/cucumber"
+import { Given, When, Then, setDefaultTimeout, Before, After, BeforeAll, AfterAll, AfterStep, BeforeStep, Status } from "@cucumber/cucumber"
 import { Browser, BrowserContext, Page, chromium, firefox } from "@playwright/test"
 import dotenv from "dotenv"
+import { stringify } from "querystring"
 
 setDefaultTimeout(1000 * 6 * 2)
 
@@ -38,24 +39,40 @@ Before(async function (scenario) {
     brContext = await browser.newContext({ viewport: null, javaScriptEnabled: true })
     page = await brContext.newPage()
     await page.goto(process.env.app_url!)
-    console.log(`${scenario.pickle.name} is started......!!!`)
+    this.log(`${scenario.pickle.name} is started......!!!`)
 })
 
 After(async function (scenario) {
+    this.log(`${scenario.pickle.name} is ended......!!!`)
+    this.log(`The status of test is >>>>: ${scenario.result?.status}`)
+
+    this.log("this is a simple log text...!")
+
+    const obj={
+        fname:"John",
+        lname:"Kiny",
+        zip:30000      
+    }
+    this.attach(JSON.stringify(obj), "application/json")
+
+    if (scenario.result?.status == Status.FAILED){
+        const img = await page.screenshot({
+            path:`./reports/${scenario.pickle.name}.png`
+        })
+        this.attach(img, "image/png")
+    }
+
     await page.close()
     await brContext.close()
-    console.log(`${scenario.pickle.name} is ended......!!!`)
-    console.log(`The status of test is >>>>: ${scenario.result?.status}`)
-})
-
-AfterStep(async function (scenario) {
-    console.log(`${scenario.pickleStep.text} is started....!`)
 })
 
 BeforeStep(async function (scenario) {
-    console.log(`${scenario.pickleStep.text} is ended......!`)
+    this.log(`${scenario.pickleStep.text} is started ......!`)
 })
 
+AfterStep(async function (scenario) {
+    this.log(`${scenario.pickleStep.text} is ended....!`)
+})
 
 AfterAll(async function (){
     await browser.close()

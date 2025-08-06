@@ -2,11 +2,12 @@ import {Page} from "@playwright/test"
 import * as HomePageLoc from "../locators/homepageloc.json"
 import * as LoginPageLoc from "../locators/loginpageloc.json"
 import BasePage from "./basepage"
+import { ICreateLog } from "@cucumber/cucumber/lib/runtime/attachment_manager"
 
 export default class HomePage extends BasePage{
 
-    constructor(page:Page){
-        super(page)
+    constructor(page:Page, log:ICreateLog){
+        super(page, log)
     }
 
       async goToLoginPage(){
@@ -41,13 +42,13 @@ export default class HomePage extends BasePage{
             let AccountLogout = await AccountLogoutLoc.isVisible()
             if (!AccountLogout) {
                 //expect(!AccountLogout).toBe(true)
-                console.log("logout is successfull")
+                this.log("logout is successfull")
                 return true
             }
         }else{
-                console.log("login is failed...!")
-                console.log("You can't logout...! login first...!")
-                console.log("logout is failed")
+                this.log("login is failed...!")
+                this.log("You can't logout...! login first...!")
+                this.log("logout is failed")
                 return true
             }    
         }

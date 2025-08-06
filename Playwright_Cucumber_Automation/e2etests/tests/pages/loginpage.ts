@@ -1,12 +1,13 @@
 import {Page} from "@playwright/test"
 import * as LoginPageLoc from "../locators/loginpageloc.json"
 import BasePage from "./basepage"
+import { ICreateLog } from "@cucumber/cucumber/lib/runtime/attachment_manager"
 
 export default class LoginPage extends BasePage{
 
       
-    constructor(page:Page){
-        super(page)
+    constructor(page:Page, log: ICreateLog){
+        super(page, log)
     }
 
     async enterUsername(){
@@ -28,10 +29,10 @@ export default class LoginPage extends BasePage{
         if (accountInfo) {
             accountInfo
             //(accountInfo).toBe(true)
-            console.log("login is successfull")
+            this.log("login is successfull")
             return true
         } else if (badcredentials) {
-            console.log("Login failed, Bad credentials, try again...!")
+            this.log("Login failed, Bad credentials, try again...!")
             return true
         }
     }
