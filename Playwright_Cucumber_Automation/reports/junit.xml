@@ -1,11 +1,11 @@
 <?xml version="1.0"?>
-<testsuite name="Cucumber" time="13.268" tests="2" skipped="0" failures="1" errors="0" timestamp="2025-08-06T15:44:53.127Z">
-  <testcase classname="Hompe page login functionnality" name="to test login page" time="5.426">
+<testsuite name="Cucumber" time="14.273" tests="2" skipped="0" failures="1" errors="0" timestamp="2025-08-13T09:07:30.973Z">
+  <testcase classname="Hompe page login functionnality" name="to test login page" time="5.915">
     <system-out><![CDATA[Given user is on the home page..............................................passed
 When user enter login details...............................................passed
 Then user acount should be displayed........................................passed]]></system-out>
   </testcase>
-  <testcase classname="Hompe page functionnality" name="to test home page logout" time="7.331">
+  <testcase classname="Hompe page functionnality" name="to test home page logout" time="7.718">
     <failure type="Error" message="[2mexpect([22m[31mreceived[39m[2m).[22mtoBe[2m([22m[32mexpected[39m[2m) // Object.is equality[22m&#xA;&#xA;Expected: [32m2[39m&#xA;Received: [31m1[39m"><![CDATA[    at Proxy.<anonymous> (C:\Users\nordi\Documents\EQualityTech_Playwright_Cucumber training\Playwright_Cucumber_Automation\node_modules\playwright\lib\matchers\expect.js:221:24)
     at World.<anonymous> (C:\Users\nordi\Documents\EQualityTech_Playwright_Cucumber training\Playwright_Cucumber_Automation\e2etests\tests\steps\homepagelogout.spec.ts:30:15)]]></failure>
     <system-out><![CDATA[Given user is on the home page..............................................passed

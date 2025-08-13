@@ -1,13 +1,13 @@
-import { ICreateLog } from "@cucumber/cucumber/lib/runtime/attachment_manager"
+import { ICreateAttachment} from "@cucumber/cucumber/lib/runtime/attachment_manager"
 import { Page } from "@playwright/test"
 
 
 export default class BasePage{
 
    protected page: Page
-   protected log: ICreateLog
+   protected log: ICreateAttachment
 
-    constructor(page:Page, log: ICreateLog){
+    constructor(page:Page, log: ICreateAttachment){
         this.page=page
         this.log=log
     }

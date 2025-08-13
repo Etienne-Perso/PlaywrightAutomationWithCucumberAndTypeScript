@@ -8,8 +8,8 @@ let homePage:HomePage
 let loginPage:LoginPage
 
 Given('user is on the home page', async function () {
-    homePage=new HomePage(page, this.log)
-    loginPage=new LoginPage(page, this.log)
+    homePage=new HomePage(page, this.attach)
+    loginPage=new LoginPage(page, this.attach)
     await homePage.goToLoginPage()
 })
 

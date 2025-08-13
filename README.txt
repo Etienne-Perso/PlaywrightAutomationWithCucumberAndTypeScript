@@ -319,3 +319,58 @@ To generate it automatically go with this config:
 "scripts": {
     "test": "cucumber-js test & npx ts-node index.ts"
   },
+  
+  
+Sending command line args using cross-env module (multi browser/test env):
+--------------------------------------------------------------------------
+We have to install cross-en with this CLI: 
+	npm install cross-env --save-dev
+	
+1)The hooks.specs.ts file:
+
+BeforeAll(async function (){
+    dotenv.config({
+        path:`${process.cwd()}/config/.env.${process.env.npm_config_env}`
+    })
+
+    let browserType = process.env.browser
+	
+Do these changes:	
+	
+BeforeAll(async function (){
+    dotenv.config({
+        path:`${process.cwd()}/config/.env.${process.env.environment ?? 'qa'}`
+    })
+
+    let browserType = process.env.browser ?? 'chrome'
+	
+2) The index.ts file: 
+
+Do these changes
+
+    function generateHtmlReport(){
+
+         dotenv.config({
+                path:`${process.cwd()}/config/.env.${process.env.environment}` 
+            })
+        let browser = process.env.browser!  
+        options.metadata.Browser = browser || "Chrome"
+        if (options.metadata.Browser == browser ){
+            options.metadata.Browser = browser.charAt(0).toUpperCase() + browser.slice(1);
+        }
+
+        options.metadata.Url = process.env.app_url! || "https://ecommerce-playground.lambdatest.io"
+
+        let TestEnvironment = process.env.environment! 
+        options.metadata.TestEnvironment = TestEnvironment || "QA"
+         if (options.metadata.TestEnvironment == TestEnvironment){
+            options.metadata.TestEnvironment  = TestEnvironment.charAt(0).toUpperCase() + TestEnvironment.slice(1);
+        }
+
+        reporter.generate(options)
+    }
+
+To pass the browser and env parameters throught CLI:
+	npx cross-env browser=edge environment=dev npm test --> edge and dev environment will be loaded
+	npx cross-env npm test --> by default chrome and qa will be loaded since the user didn't select any browser and environment variables
+	

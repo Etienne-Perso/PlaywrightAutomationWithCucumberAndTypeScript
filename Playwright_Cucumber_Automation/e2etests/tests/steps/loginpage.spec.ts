@@ -6,7 +6,7 @@ import { expect } from "@playwright/test";
 let loginPage:LoginPage
 
 When ('user enter login details', async function () {
-    loginPage=new LoginPage(page, this.log)
+    loginPage=new LoginPage(page, this.attach)
     await loginPage.enterUsername()
     await loginPage.enterPassword() 
     this.parameters.a=10   

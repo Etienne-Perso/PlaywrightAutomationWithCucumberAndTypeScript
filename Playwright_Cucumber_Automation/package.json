@@ -17,6 +17,7 @@
     "@cucumber/cucumber": "^12.1.0",
     "@playwright/test": "^1.54.1",
     "@types/node": "^24.1.0",
+    "cross-env": "^10.0.0",
     "cucumber-html-reporter": "^6.0.0",
     "dotenv": "^17.2.1",
     "ts-node": "^10.9.2",

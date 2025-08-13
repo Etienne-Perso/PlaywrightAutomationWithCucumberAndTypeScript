@@ -1,7 +1,6 @@
-import { Given, When, Then, setDefaultTimeout, Before, After, BeforeAll, AfterAll, AfterStep, BeforeStep, Status } from "@cucumber/cucumber"
+import { setDefaultTimeout, Before, After, BeforeAll, AfterAll, AfterStep, BeforeStep, Status } from "@cucumber/cucumber"
 import { Browser, BrowserContext, Page, chromium, firefox } from "@playwright/test"
 import dotenv from "dotenv"
-import { stringify } from "querystring"
 
 setDefaultTimeout(1000 * 6 * 2)
 
@@ -11,10 +10,10 @@ let page: Page
 
 BeforeAll(async function (){
     dotenv.config({
-        path:`${process.cwd()}/config/.env.${process.env.npm_config_env}`
+        path:`${process.cwd()}/config/.env.${process.env.environment ?? 'qa'}` //if user enter nothing, by default qa environment will be selected
     })
 
-    let browserType = process.env.browser
+    let browserType = process.env.browser ?? "chrome" //if user enter nothing, by default chrome will be launched
     switch (browserType) {
         case "chrome":
         case "gc": 
@@ -39,14 +38,14 @@ Before(async function (scenario) {
     brContext = await browser.newContext({ viewport: null, javaScriptEnabled: true })
     page = await brContext.newPage()
     await page.goto(process.env.app_url!)
-    this.log(`${scenario.pickle.name} is started......!!!`)
+    this.attach(`${scenario.pickle.name} is started......!!!`)
 })
 
 After(async function (scenario) {
-    this.log(`${scenario.pickle.name} is ended......!!!`)
-    this.log(`The status of test is >>>>: ${scenario.result?.status}`)
+    this.attach(`${scenario.pickle.name} is ended......!!!`)
+    this.attach(`The status of test is >>>>: ${scenario.result?.status}`)
 
-    this.log("this is a simple log text...!")
+    this.attach("this is a simple log text...!")
 
     const obj={
         fname:"John",
@@ -67,11 +66,11 @@ After(async function (scenario) {
 })
 
 BeforeStep(async function (scenario) {
-    this.log(`${scenario.pickleStep.text} is started ......!`)
+    this.attach(`${scenario.pickleStep.text} is started ......!`)
 })
 
 AfterStep(async function (scenario) {
-    this.log(`${scenario.pickleStep.text} is ended....!`)
+    this.attach(`${scenario.pickleStep.text} is ended....!`)
 })
 
 AfterAll(async function (){
